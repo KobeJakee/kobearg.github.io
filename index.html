@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOBE.LOG</title>
+<style>
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:#05080a;color:#c9d1d3;
+    font-family:"Courier New",monospace;min-height:100vh;
+    display:flex;align-items:center;justify-content:center;
+    overflow-x:hidden;
+  }
+  body:before{
+    content:"";position:fixed;inset:0;pointer-events:none;opacity:.08;
+    background:repeating-linear-gradient(0deg,transparent 0 2px,#fff 3px 4px);
+  }
+  .wrap{width:min(900px,92vw);padding:28px 0}
+  .terminal{
+    border:1px solid #334047;background:#080d10;
+    box-shadow:0 0 40px #000;padding:28px;
+  }
+  .top{color:#718086;font-size:12px;margin-bottom:25px}
+  h1{font-size:clamp(34px,8vw,70px);letter-spacing:8px;margin:0 0 8px;color:#e7edef}
+  .sub{color:#718086;margin-bottom:30px}
+  .line{border-top:1px solid #263137;margin:22px 0}
+  .row{display:grid;grid-template-columns:180px 1fr;gap:20px;margin:12px 0}
+  .label{color:#65757b}
+  .value{color:#d9e0e2}
+  .red{color:#b86b6b}
+  .dim{color:#65757b}
+  .hidden{display:none}
+  button{
+    background:transparent;border:1px solid #4a5b61;color:#c9d1d3;
+    padding:10px 14px;font:inherit;cursor:pointer
+  }
+  button:hover{background:#111a1e}
+  input{
+    background:#05080a;border:1px solid #4a5b61;color:#d9e0e2;
+    padding:10px;font:inherit;width:100%;max-width:330px
+  }
+  .prompt{color:#8d9da2}
+  .prompt b{color:#dce5e7}
+  .error{color:#b86b6b;margin-top:12px}
+  .success{color:#9ab6a0;margin-top:18px;line-height:1.7}
+  .footer{margin-top:28px;color:#45535a;font-size:11px}
+  @media(max-width:600px){.row{grid-template-columns:1fr;gap:4px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="terminal">
+    <div class="top">ARCHIVE TERMINAL // ACCESS LOG: 001</div>
+    <h1>KOBE.LOG</h1>
+    <div class="sub">PERSONAL ARCHIVE — RECOVERED FILE</div>
+
+    <div class="line"></div>
+
+    <div class="row"><div class="label">IDENTITY</div><div class="value">KOBE</div></div>
+    <div class="row"><div class="label">DREAM</div><div class="value">MARITIME</div></div>
+    <div class="row"><div class="label">TARGET</div><div class="value">MAAP</div></div>
+    <div class="row"><div class="label">RESULT</div><div class="value">PASSED</div></div>
+    <div class="row"><div class="label">STATUS</div><div class="red">INTERRUPTED</div></div>
+    <div class="row"><div class="label">LAST KNOWN STATE</div><div class="dim">EMPTY</div></div>
+
+    <div class="line"></div>
+
+    <p>YOU KNEW HIS GOAL.</p>
+    <p>YOU KNEW HE PASSED.</p>
+    <p>YOU KNEW HIS ILLNESS CHANGED EVERYTHING.</p>
+    <p class="dim">BUT YOU WEREN'T THERE FOR EVERY THOUGHT.</p>
+
+    <div class="line"></div>
+
+    <p class="prompt">&gt; SYSTEM MESSAGE:</p>
+    <p>THE ARCHIVE CONTAINS ONE LOCKED FILE.</p>
+    <p>THE KEY IS HIDDEN IN PLAIN SIGHT.</p>
+
+    <button onclick="showHint()">[ RUN ARCHIVE CHECK ]</button>
+    <div id="hint" class="hidden">
+      <p class="dim">ARCHIVE CHECK COMPLETE.</p>
+      <p>WHO WAS THE FRIEND?</p>
+      <p class="dim">Not the person who knew everything.</p>
+      <p class="dim">Not the person who could save him.</p>
+      <p>Just someone who was there.</p>
+      <p class="prompt">&gt; ENTER ACCESS KEY:</p>
+      <input id="key" autocomplete="off" placeholder="type the answer">
+      <button onclick="unlock()">[ UNLOCK ]</button>
+      <div id="msg"></div>
+    </div>
+
+    <div id="final" class="hidden success">
+      ACCESS GRANTED.<br><br>
+      <span class="dim">FILE: LOG_089</span><br><br>
+      I remember laughing here.<br><br>
+      Before everything became about exams.<br>
+      Before MAAP.<br>
+      Before the future became something I was afraid to think about.<br><br>
+      I wonder if Alfonso remembers.<br><br>
+      <span class="dim">NEXT DESTINATION:</span><br>
+      RETURN TO THE PLACE WHERE THE JOURNEY STARTED.
+    </div>
+
+    <div class="footer">KOBE.LOG // THIS IS A FICTIONAL ARG ARCHIVE CREATED FOR A PRIVATE GAME</div>
+  </div>
+</div>
+<script>
+function showHint(){document.getElementById("hint").classList.remove("hidden")}
+function unlock(){
+  const k=document.getElementById("key").value.trim().toLowerCase();
+  const msg=document.getElementById("msg");
+  if(k==="alfonso"){
+    msg.innerHTML="";
+    document.getElementById("final").classList.remove("hidden");
+  }else{
+    msg.className="error";
+    msg.textContent="ACCESS DENIED // WRONG KEY";
+  }
+}
+document.getElementById("key").addEventListener("keydown",e=>{if(e.key==="Enter")unlock()});
+</script>
+</body>
+</html>
